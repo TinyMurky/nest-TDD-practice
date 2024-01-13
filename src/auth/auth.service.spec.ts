@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from './auth.service';
-import { mockDeep, DeepMockProxy } from 'jest-mock-extended';
+// import { mockDeep, DeepMockProxy } from 'jest-mock-extended';
+import { mockDeep } from 'jest-mock-extended';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { PrismaClient, Role } from '@prisma/client';
 import { UnauthorizedException } from '@nestjs/common';
@@ -10,7 +11,7 @@ import { bcryptProvider } from 'src/bcrypt/bcrypt.provider';
 describe('AuthService', () => {
   let authService: AuthService;
   let usersService: UsersService;
-  let prisma: DeepMockProxy<PrismaClient>;
+  // let prisma: DeepMockProxy<PrismaClient>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -46,11 +47,6 @@ describe('AuthService', () => {
         createAt: new Date(),
         updateAt: new Date(),
       };
-
-      // prisma.user.findUnique
-      //   .mockResolvedValueOnce(fakeUser)
-      //   .mockResolvedValue(null);
-
       const spyUserService = jest.spyOn(usersService, 'findOne');
       spyUserService.mockResolvedValueOnce(fakeUser).mockResolvedValue(null);
 
