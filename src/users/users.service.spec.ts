@@ -32,6 +32,7 @@ describe('UsersService', () => {
         name: 'test1',
         email: fakeEmail,
         password: 'a',
+        dewt: 'a',
         role: Role.INTERN,
         createAt: new Date(),
         updateAt: new Date(),

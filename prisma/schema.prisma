@@ -15,6 +15,7 @@ model User {
   name     String
   email    String   @unique
   password String
+  dewt     String
   role     Role
   createAt DateTime @default(now())
   updateAt DateTime @updatedAt

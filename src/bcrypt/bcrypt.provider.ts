@@ -1,4 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Provider } from '@nestjs/common';
+import * as BcryptLib from 'bcrypt';
 
-@Injectable()
-export class Bcrypt {}
+export const Bcrypt = 'lib:bcrypt';
+
+export const bcryptProvider: Provider = {
+  provide: Bcrypt,
+  useValue: BcryptLib,
+};
