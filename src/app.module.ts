@@ -8,6 +8,8 @@ import { BcryptModule } from './bcrypt/bcrypt.module';
 
 // .env
 import { ConfigModule } from '@nestjs/config';
+import { AuthGuard } from './auth/auth.guard';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -18,6 +20,12 @@ import { ConfigModule } from '@nestjs/config';
     BcryptModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+  ],
 })
 export class AppModule {}

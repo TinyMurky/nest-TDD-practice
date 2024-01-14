@@ -7,8 +7,9 @@ import { JwtService } from '@nestjs/jwt';
 export class AuthService {
   constructor(
     private readonly usersService: UsersService,
+    private readonly jwtService: JwtService,
     @Inject(Bcrypt) private bcript,
-  ) { }
+  ) {}
 
   async signIn(
     email: string,
@@ -31,9 +32,13 @@ export class AuthService {
 
     const payload = {
       id: loginUser.id,
+      name: loginUser.name,
+      email: loginUser.email,
       role: loginUser.role,
+    };
 
-    }
-    return true;
+    return {
+      access_token: await this.jwtService.signAsync(payload),
+    };
   }
 }
